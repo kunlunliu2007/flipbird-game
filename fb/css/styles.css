@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #87CEEB, #98D8E8);
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.gameLayout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+#gameContainer {
+    position: relative;
+    border: 2px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+#gameCanvas {
+    display: block;
+    background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 100%);
+}
+
+#ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.screen h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #FFD700;
+}
+
+.screen h2 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #FF6B6B;
+}
+
+.screen p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#scoreDisplay {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+#timeDisplay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.3);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#pauseButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#pauseButton:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+#pauseButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* AI Chat Styles */
+#aiChatContainer {
+    width: 300px;
+    height: 600px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+#aiChatHeader {
+    background: #4A90E2;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#aiChatHeader h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#toggleChat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+#toggleChat:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+#aiChatContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 0;
+}
+
+#chatMessages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    border-bottom: 1px solid #eee;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background: #4A90E2;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.ai-message {
+    background: #f1f1f1;
+    color: #333;
+    margin-right: auto;
+}
+
+#chatInput {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+#messageInput:focus {
+    border-color: #4A90E2;
+}
+
+#sendButton {
+    background: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+#sendButton:hover {
+    background: #357ABD;
+}
+
+#sendButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+@media (max-width: 800px) {
+    .gameLayout {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #aiChatContainer {
+        width: 400px;
+        height: 200px;
+    }
+    
+    #gameContainer {
+        border: none;
+        border-radius: 0;
+    }
+    
+    #gameCanvas {
+        width: 100vw;
+        height: 60vh;
+    }
+}
